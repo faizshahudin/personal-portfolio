@@ -1,5 +1,4 @@
 ---
-layout: "../../layouts/BlogPost.astro"
 title: "From One Big Submit to Step-by-Step: Redesigning a Lab Order System with Draft Persistence"
 slug: "multi-step-form-draft-persistence-architecture"
 date: "2026-02-28"

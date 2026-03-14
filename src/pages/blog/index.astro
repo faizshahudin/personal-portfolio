@@ -1,0 +1,107 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+
+const posts = [
+  {
+    title: "From One Big Submit to Step-by-Step: Redesigning a Lab Order System with Draft Persistence",
+    slug: "multi-step-form-draft-persistence-architecture",
+    date: "2026-02-28",
+    description: "How I redesigned a gemological lab's order creation flow from a monolithic form into a resilient multi-step wizard with per-step inserts and draft recovery — and why the real win wasn't UX, it was data integrity.",
+    tags: ["Architecture", "System Design", "React", "API Design"],
+    readingTime: "9 min read",
+  },
+];
+---
+
+<Base title="Writing — Faiz Shahudin" description="Architecture decisions, engineering tradeoffs, and system design notes from Faiz Shahudin.">
+  <Nav />
+
+  <main class="blog-page">
+    <div class="container--narrow">
+      <header class="blog-header">
+        <div class="animate-fade-up">
+          <span class="blog-header__label">Writing</span>
+        </div>
+        <h1 class="blog-header__title animate-fade-up delay-1">
+          Notes on architecture,<br /> systems, and craft.
+        </h1>
+        <p class="blog-header__sub animate-fade-up delay-2">
+          I write about real decisions made on real systems — the tradeoffs, 
+          the failures, and the patterns that turned out to be worth keeping.
+        </p>
+      </header>
+
+      <!-- Filter row -->
+      <div class="blog-meta animate-fade-up delay-3">
+        <span class="blog-meta__count">{posts.length} {posts.length === 1 ? 'article' : 'articles'}</span>
+      </div>
+
+      <!-- Posts -->
+      <div class="posts-list animate-fade-up delay-4">
+        {posts.map(post => (
+          <PostCard {...post} />
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .blog-page {
+    padding: 60px 0 40px;
+  }
+
+  .blog-header {
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+
+  .blog-header__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-3);
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .blog-header__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .blog-header__sub {
+    font-size: 1rem;
+    color: var(--text-2);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+
+  .blog-meta {
+    margin-bottom: 24px;
+  }
+
+  .blog-meta__count {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+  }
+
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+</style>

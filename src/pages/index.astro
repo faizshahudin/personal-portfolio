@@ -1,0 +1,448 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+
+// In production: use Astro.glob or content collections
+const posts = [
+  {
+    title: "From One Big Submit to Step-by-Step: Redesigning a Lab Order System with Draft Persistence",
+    slug: "multi-step-form-draft-persistence-architecture",
+    date: "2026-02-28",
+    description: "How I redesigned a gemological lab's order creation flow from a monolithic form into a resilient multi-step wizard with per-step inserts and draft recovery — and why the real win wasn't UX, it was data integrity.",
+    tags: ["Architecture", "System Design", "React", "API Design"],
+    readingTime: "9 min read",
+  },
+];
+
+const experience = [
+  {
+    role: "Solution Architect",
+    company: "Gemological Laboratory Malaysia",
+    period: "2024 — Present",
+    desc: "Architecting the JCMS (Jewellery Certification Management System) — a paperless, end-to-end lab management platform covering job order creation, gemologist grading workflows, certificate generation, and payment tracking.",
+    tags: ["React 17", "Node.js", "Ant Design", "Redux"],
+  },
+];
+
+const skills = [
+  "System Architecture", "API Design", "React / Next.js", "Node.js",
+  "PostgreSQL", "Redis", "Docker", "CI/CD", "Technical Leadership",
+  "Paperless Workflow Design",
+];
+---
+
+<Base title="Faiz Shahudin — Solution Architect">
+  <Nav />
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="hero">
+      <div class="container--narrow">
+        <div class="hero__eyebrow animate-fade-up">
+          <span class="tag tag--teal">Available for consulting</span>
+        </div>
+
+        <h1 class="hero__title animate-fade-up delay-1">
+          I design systems that hold up<br />
+          <em>when things go wrong.</em>
+        </h1>
+
+        <p class="hero__sub animate-fade-up delay-2">
+          Solution Architect based in Malaysia. I build resilient, paperless 
+          enterprise systems — with a focus on clean API boundaries, 
+          progressive data persistence, and workflows that don't punish users 
+          for failure.
+        </p>
+
+        <div class="hero__actions animate-fade-up delay-3">
+          <a href="/blog" class="hero__btn hero__btn--primary">Read my writing →</a>
+          <a href="/#work" class="hero__btn hero__btn--ghost">View my work</a>
+        </div>
+
+        <!-- Mono stats -->
+        <div class="hero__stats animate-fade-up delay-4">
+          <div class="hero__stat">
+            <span class="hero__stat-num">8+</span>
+            <span class="hero__stat-label">years in engineering</span>
+          </div>
+          <div class="hero__stat-div"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-num">3</span>
+            <span class="hero__stat-label">enterprise systems delivered</span>
+          </div>
+          <div class="hero__stat-div"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-num">MY</span>
+            <span class="hero__stat-label">Kuala Lumpur</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative grid -->
+      <div class="hero__grid" aria-hidden="true"></div>
+    </section>
+
+    <!-- ── Latest Writing ── -->
+    <section class="section" id="writing">
+      <div class="container--narrow">
+        <div class="section__head">
+          <h2 class="section__title">Latest Writing</h2>
+          <a href="/blog" class="section__more">All posts →</a>
+        </div>
+
+        <div class="posts-list">
+          {posts.map(post => (
+            <PostCard {...post} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Work / Experience ── -->
+    <section class="section" id="work">
+      <div class="container--narrow">
+        <div class="section__head">
+          <h2 class="section__title">Work</h2>
+        </div>
+
+        <div class="work-list">
+          {experience.map(exp => (
+            <div class="work-item">
+              <div class="work-item__left">
+                <span class="work-item__period">{exp.period}</span>
+              </div>
+              <div class="work-item__right">
+                <div class="work-item__role">{exp.role}</div>
+                <div class="work-item__company">{exp.company}</div>
+                <p class="work-item__desc">{exp.desc}</p>
+                <div class="work-item__tags">
+                  {exp.tags.map(t => (
+                    <span class="tag tag--ghost">{t}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- ── About ── -->
+    <section class="section" id="about">
+      <div class="container--narrow">
+        <div class="about-grid">
+          <div class="about-text">
+            <h2 class="section__title" style="margin-bottom: 20px;">About</h2>
+            <p>
+              I'm a Solution Architect with a background in full-stack engineering.
+              Most of my work lives at the intersection of backend system design
+              and the frontend experiences that expose them to real users.
+            </p>
+            <p>
+              My current focus is on enterprise lab and certification management 
+              systems — specifically, how to design workflows that are resilient 
+              to failure, fully auditable, and genuinely paperless without 
+              sacrificing legal validity.
+            </p>
+            <p>
+              I write about architectural decisions, tradeoffs I've actually 
+              faced in production, and patterns that travel well across problem domains.
+            </p>
+            <a href="mailto:faizshahudin@gmail.com" class="about__contact">
+              faizshahudin@gmail.com
+            </a>
+          </div>
+
+          <div class="about-skills">
+            <div class="skills-label">Tools & Craft</div>
+            <div class="skills-grid">
+              {skills.map(s => (
+                <span class="skill-chip">{s}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 100px 0 80px;
+    overflow: hidden;
+  }
+
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(240,165,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(240,165,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black, transparent);
+    pointer-events: none;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: 24px;
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .hero__title em {
+    color: var(--amber);
+    font-style: italic;
+  }
+
+  .hero__sub {
+    font-size: 1.05rem;
+    color: var(--text-2);
+    line-height: 1.75;
+    max-width: 580px;
+    margin-bottom: 36px;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+
+  .hero__btn {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    padding: 10px 22px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: all .2s;
+    letter-spacing: 0.02em;
+  }
+  .hero__btn--primary {
+    background: var(--amber);
+    color: #0d1117;
+  }
+  .hero__btn--primary:hover {
+    background: #f5b52a;
+    opacity: 1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(240,165,0,0.3);
+  }
+  .hero__btn--ghost {
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+  .hero__btn--ghost:hover {
+    border-color: var(--border-hover);
+    color: var(--text);
+    opacity: 1;
+  }
+
+  .hero__stats {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hero__stat-num {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .hero__stat-label {
+    font-size: 12px;
+    color: var(--text-3);
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+  .hero__stat-div {
+    width: 1px;
+    height: 36px;
+    background: var(--border);
+  }
+
+  /* ── Sections ── */
+  .section {
+    padding: 64px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .section__title {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-3);
+  }
+
+  .section__more {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--amber);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+
+  /* ── Posts ── */
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* ── Work ── */
+  .work-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .work-item:last-child { border-bottom: none; }
+
+  .work-item__period {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+    padding-top: 4px;
+    line-height: 1.6;
+  }
+
+  .work-item__role {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .work-item__company {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--amber);
+    margin-bottom: 12px;
+    letter-spacing: 0.03em;
+  }
+
+  .work-item__desc {
+    color: var(--text-2);
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+
+  .work-item__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ── About ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text-2);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .about__contact {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--amber);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(240,165,0,0.3);
+    padding-bottom: 2px;
+    transition: border-color .2s;
+  }
+  .about__contact:hover {
+    border-color: var(--amber);
+    opacity: 1;
+  }
+
+  .skills-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-3);
+    margin-bottom: 14px;
+  }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-chip {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background: var(--bg-3);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+    transition: all .2s;
+  }
+  .skill-chip:hover {
+    border-color: var(--amber);
+    color: var(--amber);
+    background: var(--amber-glow);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 700px) {
+    .hero { padding: 64px 0 48px; }
+    .work-item { grid-template-columns: 1fr; gap: 8px; }
+    .work-item__period { padding-top: 0; }
+    .about-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,30 @@
+---
+// src/pages/blog/[slug].astro
+// Dynamic route — one page per markdown post.
+// In production with Astro content collections, use getStaticPaths() + getCollection('blog').
+// For this project structure, we import the markdown file directly.
+
+export async function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'multi-step-form-draft-persistence-architecture' },
+    },
+  ];
+}
+
+const { slug } = Astro.params;
+
+// Import the markdown file
+// Astro processes .md files with the layout specified in frontmatter,
+// but since we're not using content collections here, we render via glob.
+const posts = await Astro.glob('../../content/blog/*.md');
+const post = posts.find(p => p.frontmatter.slug === slug);
+
+if (!post) {
+  return Astro.redirect('/blog');
+}
+
+const { Content, frontmatter } = post;
+---
+
+<Content />

@@ -1,0 +1,40 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__left">
+      <span class="footer__logo">Faiz Shahudin</span>
+      <span class="footer__sep">·</span>
+      <span class="footer__role">Solution Architect</span>
+    </div>
+    <div class="footer__right">
+      <span class="footer__copy">© {year} — Built with Astro</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    margin-top: 80px;
+    padding: 28px 0;
+  }
+  .footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer__left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+  }
+  .footer__logo { font-family: var(--font-display); font-weight: 600; color: var(--text); }
+  .footer__sep  { color: var(--text-3); }
+  .footer__role { color: var(--text-2); font-family: var(--font-mono); font-size: 12px; }
+  .footer__copy { color: var(--text-3); font-size: 12px; font-family: var(--font-mono); }
+</style>

@@ -1,0 +1,226 @@
+---
+import Base from './Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  frontmatter: {
+    title: string;
+    date: string;
+    description: string;
+    tags?: string[];
+    readingTime?: string;
+  };
+}
+
+const { frontmatter } = Astro.props;
+const { title, date, description, tags = [], readingTime } = frontmatter;
+
+const formattedDate = new Date(date).toLocaleDateString('en-MY', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+
+<Base title={`${title} — Faiz Shahudin`} description={description}>
+  <Nav />
+
+  <main class="post-page">
+    <article>
+      <!-- Header -->
+      <header class="post-header container--narrow">
+        <div class="post-header__meta animate-fade-up">
+          <time class="post-header__date">{formattedDate}</time>
+          {readingTime && <span class="post-header__sep">·</span>}
+          {readingTime && <span class="post-header__read">{readingTime}</span>}
+        </div>
+
+        <h1 class="post-header__title animate-fade-up delay-1">{title}</h1>
+        <p class="post-header__desc animate-fade-up delay-2">{description}</p>
+
+        {tags.length > 0 && (
+          <div class="post-header__tags animate-fade-up delay-3">
+            {tags.map(tag => (
+              <span class={`tag ${tag === 'Architecture' || tag === 'System Design' ? 'tag--amber' : 'tag--ghost'}`}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div class="post-header__divider animate-fade-up delay-4"></div>
+      </header>
+
+      <!-- Body -->
+      <div class="post-body container--narrow animate-fade-up delay-5">
+        <slot />
+      </div>
+    </article>
+
+    <!-- Back link -->
+    <div class="container--narrow post-back">
+      <a href="/blog" class="post-back__link">← Back to writing</a>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .post-page {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  /* ── Header ── */
+  .post-header {
+    padding-bottom: 40px;
+  }
+
+  .post-header__meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .post-header__date,
+  .post-header__read {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .post-header__sep { color: var(--text-3); }
+
+  .post-header__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .post-header__desc {
+    font-size: 1.05rem;
+    color: var(--text-2);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .post-header__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .post-header__divider {
+    height: 1px;
+    background: linear-gradient(to right, var(--amber), transparent);
+    opacity: 0.4;
+  }
+
+  /* ── Body ── */
+  .post-body {
+    padding-top: 40px;
+    color: var(--text-2);
+  }
+
+  .post-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-body :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .post-body :global(p) {
+    margin-bottom: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .post-body :global(ul),
+  .post-body :global(ol) {
+    margin: 1rem 0 1.25rem 1.5rem;
+  }
+
+  .post-body :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+
+  .post-body :global(strong) {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .post-body :global(a) {
+    color: var(--amber);
+    text-decoration: underline;
+    text-decoration-color: rgba(240,165,0,0.35);
+    text-underline-offset: 3px;
+  }
+
+  /* Tables */
+  .post-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 14px;
+  }
+
+  .post-body :global(th) {
+    background: var(--bg-3);
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+
+  .post-body :global(td) {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    color: var(--text-2);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+
+  .post-body :global(tr:nth-child(even) td) {
+    background: rgba(255,255,255,0.02);
+  }
+
+  /* Back link */
+  .post-back {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .post-back__link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text-3);
+    text-decoration: none;
+    transition: color .2s;
+  }
+  .post-back__link:hover { color: var(--amber); opacity: 1; }
+</style>

@@ -1,0 +1,172 @@
+---
+const navLinks = [
+  { href: '/',        label: 'Home' },
+  { href: '/blog',    label: 'Writing' },
+  { href: '/#work',   label: 'Work' },
+  { href: '/#about',  label: 'About' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="nav">
+  <div class="container nav__inner">
+    <a href="/" class="nav__logo">
+      <span class="nav__logo-bracket">[</span>
+      <span class="nav__logo-name">faiz</span>
+      <span class="nav__logo-dot">.</span>
+      <span class="nav__logo-role">sa</span>
+      <span class="nav__logo-bracket">]</span>
+    </a>
+
+    <div class="nav__links">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`nav__link ${currentPath === link.href ? 'nav__link--active' : ''}`}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a href="mailto:faizshahudin@gmail.com" class="nav__cta">
+        Get in touch
+      </a>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button class="nav__hamburger" id="menu-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav__mobile" id="mobile-menu">
+    {navLinks.map(link => (
+      <a href={link.href} class="nav__mobile-link">{link.label}</a>
+    ))}
+    <a href="mailto:faizshahudin@gmail.com" class="nav__mobile-link nav__mobile-link--cta">Get in touch →</a>
+  </div>
+</nav>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  toggle?.addEventListener('click', () => {
+    menu?.classList.toggle('nav__mobile--open');
+    toggle.classList.toggle('nav__hamburger--open');
+  });
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,17,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  /* Logo */
+  .nav__logo {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav__logo-bracket { color: var(--text-3); }
+  .nav__logo-name    { color: var(--amber); }
+  .nav__logo-dot     { color: var(--text-3); }
+  .nav__logo-role    { color: var(--teal); }
+
+  /* Links */
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav__link {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+    text-decoration: none;
+    transition: color .2s;
+    letter-spacing: 0.01em;
+  }
+  .nav__link:hover,
+  .nav__link--active { color: var(--text); opacity: 1; }
+
+  .nav__cta {
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--amber);
+    border: 1px solid rgba(240,165,0,0.35);
+    padding: 6px 16px;
+    border-radius: 4px;
+    transition: all .2s;
+    text-decoration: none;
+  }
+  .nav__cta:hover {
+    background: var(--amber-dim);
+    opacity: 1;
+  }
+
+  /* Hamburger */
+  .nav__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav__hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-2);
+    transition: all .2s;
+    border-radius: 2px;
+  }
+  .nav__hamburger--open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav__hamburger--open span:nth-child(2) { opacity: 0; }
+  .nav__hamburger--open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  /* Mobile menu */
+  .nav__mobile {
+    display: none;
+    flex-direction: column;
+    background: var(--bg-2);
+    border-top: 1px solid var(--border);
+    padding: 16px 24px;
+    gap: 4px;
+  }
+  .nav__mobile--open { display: flex; }
+
+  .nav__mobile-link {
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--text-2);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav__mobile-link:last-child { border-bottom: none; }
+  .nav__mobile-link--cta { color: var(--amber); font-weight: 600; }
+
+  @media (max-width: 680px) {
+    .nav__links    { display: none; }
+    .nav__hamburger { display: flex; }
+  }
+</style>

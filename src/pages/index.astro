@@ -7,6 +7,14 @@ import PostCard from '../components/PostCard.astro';
 // In production: use Astro.glob or content collections
 const posts = [
   {
+    title: "When Active Record Betrayed Me: Moving to Domain-Driven Design for Reusable npm Packages",
+    slug: "active-record-vs-ddd-reusable-npm-packages",
+    date: "2026-03-17",
+    description: "I built a reusable npm package using Active Record pattern — it worked great, until a new project needed Drizzle instead of Sequelize. Here's how that failure led me to DDD, and why separating domain logic from persistence made my packages genuinely reusable.",
+    tags: ["Architecture", "System Design", "TypeScript", "DDD"],
+    readingTime: "7 min read",
+  },
+  {
     title: "From One Big Submit to Step-by-Step: Redesigning a Lab Order System with Draft Persistence",
     slug: "multi-step-form-draft-persistence-architecture",
     date: "2026-02-28",
@@ -18,11 +26,18 @@ const posts = [
 
 const experience = [
   {
-    role: "Solution Architect",
-    company: "Gemological Laboratory Malaysia",
-    period: "2024 — Present",
-    desc: "Architecting the JCMS (Jewellery Certification Management System) — a paperless, end-to-end lab management platform covering job order creation, gemologist grading workflows, certificate generation, and payment tracking.",
-    tags: ["React 17", "Node.js", "Ant Design", "Redux"],
+    role: "Technical Lead",
+    company: "Tomei Consolidated Berhad",
+    period: "2022 — Present",
+    desc: "Responsible for solution design across multiple subsidiary businesses within Tomei Group — covering system architecture, API boundaries, ORM strategy, and cross-team technical direction. Manages and mentors a development team, conducts weekly sprint ceremonies, and bridges the gap between business requirements and technical execution.",
+    tags: ["System Design", "Architecture", "TypeScript", "React", "Team Leadership"],
+  },
+  {
+    role: "Senior Full Stack Developer",
+    company: "Tomei Consolidated Berhad",
+    period: "2021 — 2022",  // adjust year
+    desc: "Full-stack development across Tomei's internal systems. Established modular npm package architecture and reusable domain libraries consumed across multiple projects.",
+    tags: ["React", "Node.js", "Sequelize", "TypeScript"],
   },
 ];
 
@@ -50,10 +65,9 @@ const skills = [
         </h1>
 
         <p class="hero__sub animate-fade-up delay-2">
-          Solution Architect based in Malaysia. I build resilient, paperless 
-          enterprise systems — with a focus on clean API boundaries, 
-          progressive data persistence, and workflows that don't punish users 
-          for failure.
+          Technical Lead & Solution Architect at Tomei Group, Malaysia.
+          I work across multiple businesses — designing the APIs, domain boundaries,
+          and team practices that let software scale without falling apart.
         </p>
 
         <div class="hero__actions animate-fade-up delay-3">
@@ -136,19 +150,20 @@ const skills = [
           <div class="about-text">
             <h2 class="section__title" style="margin-bottom: 20px;">About</h2>
             <p>
-              I'm a Solution Architect with a background in full-stack engineering.
-              Most of my work lives at the intersection of backend system design
-              and the frontend experiences that expose them to real users.
+              I'm a Technical Lead and Solution Architect based in Kuala Lumpur,
+              working across multiple businesses within Tomei Group — a publicly
+              listed conglomerate on Bursa Malaysia. My work spans system design,
+              API architecture, and frontend engineering across diverse business domains.
             </p>
             <p>
-              My current focus is on enterprise lab and certification management 
-              systems — specifically, how to design workflows that are resilient 
-              to failure, fully auditable, and genuinely paperless without 
-              sacrificing legal validity.
+              I care about building things that hold up — modular systems with clean
+              boundaries, workflows resilient to failure, and codebases that a team
+              can actually grow in. Most of my architectural decisions eventually come
+              down to one question: will this still make sense in two years?
             </p>
             <p>
-              I write about architectural decisions, tradeoffs I've actually 
-              faced in production, and patterns that travel well across problem domains.
+              I write about decisions I've actually faced in production — the tradeoffs,
+              the dead ends, and the patterns worth keeping.
             </p>
             <a href="mailto:faizshahudin@gmail.com" class="about__contact">
               faizshahudin@gmail.com
